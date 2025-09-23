@@ -2,6 +2,8 @@
 
 #include "pch.h"
 
+using namespace winrt;
+
 #include <functional>
 
 #include "NativeModules.h"
