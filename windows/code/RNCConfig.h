@@ -18,8 +18,8 @@ namespace RNCConfig
 #endif
 
   // TurboModule-friendly sync APIs
-  REACT_SYNC_METHOD(getAll);
-  Microsoft::ReactNative::JSValueObject getAll() noexcept;
+  REACT_SYNC_METHOD(getConstants);
+  Microsoft::ReactNative::JSValueObject getConstants() noexcept;
 
   REACT_SYNC_METHOD(get);
   std::string get(std::string const& key) noexcept;

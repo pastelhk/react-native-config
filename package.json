@@ -28,7 +28,6 @@
     "ios/",
     "windows/",
     "src/",
-    "codegen/",
     "index.js",
     "index.d.ts",
     "react-native-config.podspec",
@@ -48,20 +47,6 @@
   "peerDependenciesMeta": {
     "react-native-windows": {
       "optional": true
-    }
-  },
-  "codegenConfig": {
-    "name": "RNCConfigSpec",
-    "type": "modules",
-    "jsSrcsDir": "./codegen",
-    "android": {
-      "javaPackageName": "com.lugg.RNCConfig"
-    },
-    "ios": {
-      "prefix": "RNC"
-    },
-    "windows": {
-      "cppNamespace": "RNCConfig"
     }
   }
 }

@@ -8,7 +8,7 @@ using namespace Microsoft::ReactNative;
 
 namespace RNCConfig
 {
-	JSValueObject RNCConfigModule::getAll() noexcept
+	JSValueObject RNCConfigModule::getConstants() noexcept
 	{
 		JSValueObject obj{};
 	#if __has_include("RNCConfigValuesObject.inc.g.h")
