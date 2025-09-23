@@ -33,3 +33,4 @@ namespace RNCConfig
   std::string compositionInfo() noexcept;
   };
 }
+
