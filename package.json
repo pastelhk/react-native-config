@@ -1,6 +1,6 @@
 {
   "name": "@pasteltech/react-native-config",
-  "version": "1.5.9",
+  "version": "1.6.0-beta.0",
   "description": "Expose config variables to React Native apps",
   "keywords": [
     "env",
