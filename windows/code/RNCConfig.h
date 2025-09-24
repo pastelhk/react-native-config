@@ -1,14 +1,20 @@
 #pragma once
 
 #include "pch.h"
+#include <JSValue.h>
 
-using namespace winrt;
-
-#include <functional>
+#if __has_include("../codegen/NativeConfigModuleDataTypes.g.h")
+  #include "../codegen/NativeConfigModuleDataTypes.g.h"
+#endif
+#include "../codegen/NativeConfigModuleSpec.g.h"
 
 #include "NativeModules.h"
+
+#if __has_include("RNCConfigValues.h")
 #include "RNCConfigValues.h"
-namespace RNCConfig
+#endif
+
+namespace winrt::RNCConfig
 {
   REACT_MODULE(RNCConfigModule);
   struct RNCConfigModule
@@ -22,17 +28,5 @@ namespace RNCConfig
   // TurboModule-friendly sync APIs
   REACT_SYNC_METHOD(getConstants);
   Microsoft::ReactNative::JSValueObject getConstants() noexcept;
-
-  REACT_SYNC_METHOD(get);
-  std::string get(std::string const& key) noexcept;
-
-  // Keep constants available via the classic constants provider too
-  REACT_CONSTANT_PROVIDER(ProvideConstants);
-  void ProvideConstants(Microsoft::ReactNative::ReactConstantProvider& provider) noexcept;
-
-  // Example Windows.UI.Composition usage exposed via a sync method
-  REACT_SYNC_METHOD(compositionInfo);
-  std::string compositionInfo() noexcept;
-  };
 }
 
