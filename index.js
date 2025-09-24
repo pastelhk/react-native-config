@@ -1,40 +1,4 @@
 "use strict";
 
-// Bridge to:
-// Android: buildConfigField vars set in build.gradle, and exported via ReactConfig
-// iOS: config vars set in xcconfig and exposed via RNCConfig.m
-import { NativeModules, TurboModuleRegistry, Platform } from "react-native";
-
-// New-arch TurboModule name should match native module name
-const TM_NAME = "RNCConfigModule";
-
-function getTurboModule() {
-  try {
-    if (TurboModuleRegistry?.get) {
-      return TurboModuleRegistry.get(TM_NAME);
-    }
-  } catch (_) {}
-  return null;
-}
-
-const Turbo = getTurboModule();
-const Paper = NativeModules?.RNCConfigModule;
-
-let config = {};
-if (Turbo) {
-  // Prefer TM sync getConstants when available to return a plain object
-  if (typeof Turbo.getConstants === "function") {
-    try {
-      config = Turbo.getConstants() || {};
-    } catch (_) {
-      config = {};
-    }
-  } else {
-    config = Turbo;
-  }
-} else if (Paper) {
-  config = Paper;
-}
-
-export const Config = config;
-export default Config;
+export const Config =
+  require("./codegen/NativeConfigModule").default.getConstants().constants;

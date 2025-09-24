@@ -13,10 +13,11 @@
 #include <optional>
 #include <functional>
 #include <vector>
+#include <JSValue.h>
 
 namespace RNCConfigCodegen {
 
-struct ConfigModuleSpec_Constants {
+struct ConfigModuleSpec_getConstants_returnType {
     winrt::Microsoft::ReactNative::JSValue constants;
 };
 
