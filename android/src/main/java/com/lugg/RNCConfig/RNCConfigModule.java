@@ -61,7 +61,7 @@ public class RNCConfigModule extends NativeConfigModuleSpec {
       Log.d("ReactNative", "ReactConfig: Could not find BuildConfig class");
     }
 
-    constants.put("constants", realConstants);
+    constants.put("config", realConstants);
 
     return constants;
   }

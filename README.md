@@ -49,80 +49,86 @@ if cocoapods are used in the project then pod has to be installed as well:
 (cd ios; pod install)
 ```
 
- - Manual Link (iOS / macOS)
+- Manual Link (iOS / macOS)
 
-	1. In XCode, in the project navigator, right click `Libraries` ➜ `Add 		Files to [your project's name]`
-	2. Go to `node_modules` ➜ `react-native-config` ➜ `ios`  and add 		`ReactNativeConfig.xcodeproj`
-	3. Expand the `ReactNativeConfig.xcodeproj` ➜ `Products` folder
-	4. In the project navigator, select your project. Add 		`libRNCConfig.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-	5. And go the Build Settings tab. Make sure All is toggled on (instead of Basic)
-	6. Look for Header Search Paths and add `$(SRCROOT)/../node_modules/react-native-config/ios/**` as `non-recursive`
+  1.  In XCode, in the project navigator, right click `Libraries` ➜ `Add 		Files to [your project's name]`
+  2.  Go to `node_modules` ➜ `react-native-config` ➜ `ios` and add `ReactNativeConfig.xcodeproj`
+  3.  Expand the `ReactNativeConfig.xcodeproj` ➜ `Products` folder
+  4.  In the project navigator, select your project. Add `libRNCConfig.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
+  5.  And go the Build Settings tab. Make sure All is toggled on (instead of Basic)
+  6.  Look for Header Search Paths and add `$(SRCROOT)/../node_modules/react-native-config/ios/**` as `non-recursive`
 
+- Manual Link (Android)
 
- - Manual Link (Android) 
+  **android/settings.gradle**
 
-	**android/settings.gradle**
-	
-	```diff
-	+ include ':react-native-config'
-	+ project(':react-native-config').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-config/android')
-	```
-	**android/app/build.gradle**
-	
-	```diff
-	dependencies {
-		implementation "com.facebook.react:react-native:+"  // From node_modules
-	+	implementation project(':react-native-config')
-	}
-	```
-	**MainApplication.java**
-	
-	```diff
-	+ import com.lugg.RNCConfig.RNCConfigPackage;
-	
-	@Override
-	protected List<ReactPackage> getPackages() {
-		   return Arrays.asList(
-           		new MainReactPackage()
-	+      		new RNCConfigPackage()
-	    );
-	}
-	```
+  ```diff
+  + include ':react-native-config'
+  + project(':react-native-config').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-config/android')
+  ```
 
- - Manual Link (Windows)
+  **android/app/build.gradle**
 
-	**windows/myapp.sln**
+  ```diff
+  dependencies {
+  	implementation "com.facebook.react:react-native:+"  // From node_modules
+  +	implementation project(':react-native-config')
+  }
+  ```
 
-	Add the `RNCConfig` project to your solution.
+  **MainApplication.java**
 
-	1. Open the solution in Visual Studio 2019
-	2. Right-click Solution icon in Solution Explorer > Add > Existing Project  
-	  - if using `react-native-windows@0.62` or later select `node_modules\react-native-config\windows\RNCConfig\RNCConfig.vcxproj`
-		- if using `react-native-windows@0.61` select `node_modules\react-native-config\windows\RNCConfig61\RNCConfig61.vcxproj`
+  ```diff
+  + import com.lugg.RNCConfig.RNCConfigPackage;
 
-	**windows/myapp/myapp.vcxproj**
+  @Override
+  protected List<ReactPackage> getPackages() {
+  	   return Arrays.asList(
+          		new MainReactPackage()
+  +      		new RNCConfigPackage()
+      );
+  }
+  ```
 
-	Add a reference to `RNCConfig` to your main application project. From Visual Studio 2019:
+- Manual Link (Windows)
 
-	1. Right-click main application project > Add > Reference...  
-	Check `RNCConfig` from Solution Projects.
+  **windows/myapp.sln**
 
-	**pch.h**
+  Add the `RNCConfig` project to your solution.
 
-	Add `#include "winrt/RNCConfig.h"`.
+  1.  Open the solution in Visual Studio 2019
+  2.  Right-click Solution icon in Solution Explorer > Add > Existing Project
 
-	**app.cpp**
+  - if using `react-native-windows@0.62` or later select `node_modules\react-native-config\windows\RNCConfig\RNCConfig.vcxproj`
+    - if using `react-native-windows@0.61` select `node_modules\react-native-config\windows\RNCConfig61\RNCConfig61.vcxproj`
 
-	Add `PackageProviders().Append(winrt::RNCConfig::ReactPackageProvider());` before `InitializeComponent();`.
+  **windows/myapp/myapp.vcxproj**
+
+  Add a reference to `RNCConfig` to your main application project. From Visual Studio 2019:
+
+  1.  Right-click main application project > Add > Reference...  
+      Check `RNCConfig` from Solution Projects.
+
+  **pch.h**
+
+  Add `#include "winrt/RNCConfig.h"`.
+
+  **app.cpp**
+
+  Add `PackageProviders().Append(winrt::RNCConfig::ReactPackageProvider());` before `InitializeComponent();`.
 
 ### Extra step for Android
+
 #### Using RN-Integrate
+
 Apply extra steps automatically:
+
 ```sh
 npx react-native-integrate react-native-config
 ```
 
 #### Manual
+
 You'll also need to manually apply a plugin to your app, from `android/app/build.gradle`:
 
 ```
@@ -147,13 +153,13 @@ defaultConfig {
 If you want to get autocompletion and typesafety for your .env files. Create a file named `react-native-config.d.ts` in the same directory where you put your type declarations, and add the following contents:
 
 ```ts
-declare module 'react-native-config' {
+declare module "react-native-config" {
   export interface NativeConfig {
-      HOSTNAME?: string;
+    HOSTNAME?: string;
   }
-  
-  export const Config: NativeConfig
-  export default Config
+
+  export const Config: NativeConfig;
+  export default Config;
 }
 ```
 
@@ -219,6 +225,7 @@ NSDictionary *config = [RNCConfig env];
 ### Windows
 
 You can access variables declared in `.env` from C++ in your App project:
+
 ```
 std::string api_key = ReactNativeConfig::API_KEY;
 ```
@@ -297,7 +304,9 @@ The same environment variable can be used to assemble releases with a different 
 ```
 $ cd android && ENVFILE=.env.staging ./gradlew assembleRelease
 ```
+
 Note: When trying to release the bundle you need to export with a different config
+
 ```
 $ cd android && export ENVFILE=.env.staging ./gradlew bundleRelease
 ```
@@ -337,7 +346,7 @@ Then edit the newly created scheme to make it use a different env file. From the
   ```
   cp "${PROJECT_DIR}/../.env.staging" "${PROJECT_DIR}/../.env"  # replace .env.staging for your file
   ```
-Also ensure that "Provide build settings from", just above the script, has a value selected so that PROJECT_DIR is set.
+  Also ensure that "Provide build settings from", just above the script, has a value selected so that PROJECT_DIR is set.
 
 Alternatively, if you have separated build configurations, you may easily set the different envfiles per configuration by adding these lines into the end of Podfile:
 
@@ -395,11 +404,12 @@ If using Dexguard, the shrinking phase will remove resources it thinks are unuse
 
     -keepresources string/build_config_package
 
-### TypeError: _reactNativeConfig.default.getConstants is not a function
+### TypeError: \_reactNativeConfig.default.getConfig is not a function
 
 This error stems from `.env` file being malformed. Accepted formats are listed here https://regex101.com/r/cbm5Tp/1. Common causes are:
-  - Missing the .env file entirely
-  - Rogue space anywhere, example: in front of env variable: ` MY_ENV='foo'`
+
+- Missing the .env file entirely
+- Rogue space anywhere, example: in front of env variable: ` MY_ENV='foo'`
 
 ## Testing
 

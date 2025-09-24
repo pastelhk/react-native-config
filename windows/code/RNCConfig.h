@@ -26,7 +26,7 @@ namespace winrt::RNCConfig
 // Generated constants will be included at build-time
 #endif
 
-  REACT_SYNC_METHOD(getConstants);
-  RNCConfigCodegen::ConfigModuleSpec_getConstants_returnType getConstants() noexcept;
+  REACT_SYNC_METHOD(getConfig);
+  RNCConfigCodegen::ConfigModuleSpec_getConfig_returnType getConfig() noexcept;
 };
 }

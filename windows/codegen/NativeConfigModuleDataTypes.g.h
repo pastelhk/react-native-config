@@ -17,8 +17,8 @@
 
 namespace RNCConfigCodegen {
 
-struct ConfigModuleSpec_getConstants_returnType {
-    winrt::Microsoft::ReactNative::JSValue constants;
+struct ConfigModuleSpec_getConfig_returnType {
+    winrt::Microsoft::ReactNative::JSValue config;
 };
 
 } // namespace RNCConfigCodegen

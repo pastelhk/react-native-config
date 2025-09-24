@@ -19,10 +19,10 @@ RCT_EXPORT_MODULE()
 }
 
 - (NSDictionary *)constantsToExport {
-    return @{ @"constants": RNCConfig.env };
+    return @{ @"config": RNCConfig.env };
 }
 
-- (NSDictionary *)getConstants {
+- (NSDictionary *)getConfig {
     return self.constantsToExport;
 }
 

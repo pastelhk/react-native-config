@@ -15,16 +15,16 @@
 
 namespace RNCConfigCodegen {
 
-inline winrt::Microsoft::ReactNative::FieldMap GetStructInfo(ConfigModuleSpec_getConstants_returnType*) noexcept {
+inline winrt::Microsoft::ReactNative::FieldMap GetStructInfo(ConfigModuleSpec_getConfig_returnType*) noexcept {
     winrt::Microsoft::ReactNative::FieldMap fieldMap {
-        {L"constants", &ConfigModuleSpec_getConstants_returnType::constants},
+        {L"config", &ConfigModuleSpec_getConfig_returnType::config},
     };
     return fieldMap;
 }
 
 struct ConfigModuleSpec : winrt::Microsoft::ReactNative::TurboModuleSpec {
   static constexpr auto methods = std::tuple{
-      SyncMethod<ConfigModuleSpec_getConstants_returnType() noexcept>{0, L"getConstants"},
+      SyncMethod<ConfigModuleSpec_getConfig_returnType() noexcept>{0, L"getConfig"},
   };
 
   template <class TModule>
@@ -33,9 +33,9 @@ struct ConfigModuleSpec : winrt::Microsoft::ReactNative::TurboModuleSpec {
 
     REACT_SHOW_METHOD_SPEC_ERRORS(
           0,
-          "getConstants",
-          "    REACT_SYNC_METHOD(GetConstants) ConfigModuleSpec_Constants getConstants() noexcept {/*implementation*/}\n"
-          "    REACT_SYNC_METHOD(GetConstants) static ConfigModuleSpec_Constants getConstants() noexcept {/*implementation*/}\n");
+          "getConfig",
+          "    REACT_SYNC_METHOD(getConfig) ConfigModuleSpec_getConfig_returnType getConfig() noexcept { /* implementation */ }\n"
+          "    REACT_SYNC_METHOD(getConfig) static ConfigModuleSpec_getConfig_returnType getConfig() noexcept { /* implementation */ }\n");
   }
 };
 

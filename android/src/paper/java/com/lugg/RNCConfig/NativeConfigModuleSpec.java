@@ -34,14 +34,14 @@ public abstract class NativeConfigModuleSpec extends ReactContextBaseJavaModule 
 
   @Override
   @DoNotStrip
-  public final @Nullable Map<String, Object> getConstants() {
+  public final @Nullable Map<String, Object> getConfig() {
     Map<String, Object> constants = getTypedExportedConstants();
     if (ReactBuildConfig.DEBUG || ReactBuildConfig.IS_INTERNAL_BUILD) {
       Set<String> obligatoryFlowConstants = new HashSet<>(Arrays.asList(
-          "constants"
+          "config"
       ));
       Set<String> optionalFlowConstants = new HashSet<>();
-      Set<String> undeclaredConstants = new HashSet<>(constants.keySet());
+      Set<String> undeclaredConstants = new HashSet<>(config.keySet());
       undeclaredConstants.removeAll(obligatoryFlowConstants);
       undeclaredConstants.removeAll(optionalFlowConstants);
       if (!undeclaredConstants.isEmpty()) {
