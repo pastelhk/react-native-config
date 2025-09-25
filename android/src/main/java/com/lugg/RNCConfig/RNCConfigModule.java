@@ -25,15 +25,15 @@ public class RNCConfigModule extends NativeConfigModuleSpec {
 
   @Override
   public Map<String, Object> getTypedExportedConstants() {
-    final Map<String, Object> constants = new HashMap<>();
+    final Map<String, Object> ret = new HashMap<>();
 
     // Codegen ensures that the constants defined in the module spec and in the native module implementation
     // are consistent, which is tad problematic in this case, as the constants are dependant on the `.env`
-    // file. The simple workaround is to define a `constants` object that will contain actual constants.
+    // file. The simple workaround is to define a `config` object that will contain actual constants.
     // This way the types between JS and Native side remain consistent, while functionality stays the same.
     // TL;DR:
     // instead of exporting { constant1: "value1", constant2: "value2" }
-    // we export { constants: { constant1: "value1", constant2: "value2" } }
+    // we export { config: { constant1: "value1", constant2: "value2" } }
     // because of type safety on the new arch
     final Map<String, Object> realConstants = new HashMap<>();
 
@@ -61,8 +61,8 @@ public class RNCConfigModule extends NativeConfigModuleSpec {
       Log.d("ReactNative", "ReactConfig: Could not find BuildConfig class");
     }
 
-    constants.put("config", realConstants);
+    ret.put("config", realConstants);
 
-    return constants;
+    return ret;
   }
 }
