@@ -1,5 +1,5 @@
 {
-  "name": "react-native-config",
+  "name": "@pasteltech/react-native-config",
   "version": "1.5.9",
   "description": "Expose config variables to React Native apps",
   "keywords": [

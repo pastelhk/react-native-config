@@ -12,7 +12,7 @@
     "test:windows": "jest --config jest.config.windows.js"
   },
   "dependencies": {
-    "react-native-config": "file:../..",
+    "@pasteltech/react-native-config": "file:../..",
     "react": "19.0.0",
     "react-native": "0.79.6",
     "react-native-windows": "^0.79.4"

@@ -5,9 +5,9 @@
  * @format
  */
 
+import Config from '@pasteltech/react-native-config';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Config from 'react-native-config';
 
 const App = () => {
   console.log('Config:', Config);
