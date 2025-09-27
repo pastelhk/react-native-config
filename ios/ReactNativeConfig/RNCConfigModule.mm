@@ -4,6 +4,7 @@
 @implementation RNCConfigModule
 
 RCT_EXPORT_MODULE()
+RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(getConfig)
 
 + (BOOL)requiresMainQueueSetup
 {

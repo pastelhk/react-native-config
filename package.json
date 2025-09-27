@@ -61,7 +61,12 @@
       "javaPackageName": "com.lugg.RNCConfig"
     },
     "ios": {
-      "prefix": "RNC"
+      "modules": {
+        "RNCConfig": {
+          "className": "RNCConfigModule",
+          "unstableRequiresMainQueueSetup": true
+        }
+      }
     },
     "windows": {
       "namespace": "RNCConfigCodegen",
