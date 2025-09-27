@@ -66,10 +66,10 @@ android {
     sourceSets.main {
         java {
             if (!isNewArchitectureEnabled()) {
-                 srcDirs += 'src/paper/java'
+                srcDirs += ['src/oldarch/java']
             } else {
                 // This should be done by the RN gradle plugin, for some reason it sometimes doesn't work
-                srcDirs += 'build/generated/source/codegen/java'
+                srcDirs += ['src/newarch/java']
             }
         }
     }
