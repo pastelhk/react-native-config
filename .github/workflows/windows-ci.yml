@@ -39,10 +39,10 @@ jobs:
         cd Example
         yarn --pure-lockfile
 
-    - name: Build x64 release
-      run: |
-        cd Example
-        npx react-native run-windows --release --no-packager --no-launch --logging
+    # - name: Build x64 release
+    #   run: |
+    #     cd Example
+    #     npx react-native run-windows --release --no-packager --no-launch --logging
 
     - name: Start Appium server
       shell: powershell
