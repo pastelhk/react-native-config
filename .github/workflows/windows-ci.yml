@@ -2,7 +2,7 @@ name: Windows CI
 on: [pull_request, workflow_dispatch]
 
 env:
-  TEST_EXAMPLE_DIR: Example/0.79.6
+  TEST_EXAMPLE_DIR: Example/0.62.2
 
 jobs:
   run-windows-tests:
