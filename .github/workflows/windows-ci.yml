@@ -20,6 +20,10 @@ jobs:
       with:
         vs-version: 16.5
 
+    - name: Install Visual Studio Build Tools
+      run: |
+        choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional" -y
+
     - name: Check node modules cache
       uses: actions/cache@v3
       id: yarn-cache
