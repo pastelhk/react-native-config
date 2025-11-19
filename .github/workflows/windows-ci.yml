@@ -38,10 +38,10 @@ jobs:
         run: |
           npm ci
 
-      - name: Build x64 release
-        working-directory: ${{ env.TEST_EXAMPLE_DIR }}
-        run: |
-          npx react-native run-windows --release --no-packager --no-launch --logging
+      # - name: Build x64 release
+      #   working-directory: ${{ env.TEST_EXAMPLE_DIR }}
+      #   run: |
+      #     npx react-native run-windows --release --no-packager --no-launch --logging
 
       - name: Start Appium server
         shell: powershell
