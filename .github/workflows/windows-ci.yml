@@ -1,5 +1,5 @@
 name: Windows CI
-on: [pull_request]
+on: [pull_request, workflow_dispatch]
 
 env:
   TEST_EXAMPLE_DIR: Example/0.79.6
