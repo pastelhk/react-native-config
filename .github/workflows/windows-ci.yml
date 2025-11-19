@@ -47,3 +47,8 @@ jobs:
         run: |
           cd Example/0.79.6
           Start-Process PowerShell -ArgumentList "yarn appium"
+
+      - name: Run tests
+        run: |
+          cd Example
+          yarn test:windows
