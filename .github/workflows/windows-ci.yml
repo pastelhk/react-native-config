@@ -1,6 +1,9 @@
 name: Windows CI
 on: [pull_request, workflow_dispatch]
 
+env:
+  TEST_EXAMPLE_DIR: Example/0.79.6
+
 jobs:
   run-windows-tests:
     name: Build & run tests
@@ -24,31 +27,29 @@ jobs:
         uses: actions/cache@v3
         id: yarn-cache
         with:
-          path: ./Example/0.79.6/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          path: ./${{ env.TEST_EXAMPLE_DIR }}/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles(format('{0}/package-lock.json', env.TEST_EXAMPLE_DIR)) }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-npm-
 
       - name: Install node modules
         if: steps.yarn-cache.outputs.cache-hit != 'true'
+        working-directory: ${{ env.TEST_EXAMPLE_DIR }}
         run: |
-          cd Example/0.79.6
-          yarn --pure-lockfile
+          npm ci
 
-      - name: Install MSBuild
-        uses: microsoft/setup-msbuild@v1.3
-
-      - name: Install Visual Studio Build Tools
+      - name: Build x64 release
+        working-directory: ${{ env.TEST_EXAMPLE_DIR }}
         run: |
-          choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional" -y
+          npx react-native run-windows --release --no-packager --no-launch --logging
 
       - name: Start Appium server
         shell: powershell
+        working-directory: ${{ env.TEST_EXAMPLE_DIR }}
         run: |
-          cd Example/0.79.6
-          Start-Process PowerShell -ArgumentList "yarn appium"
+          Start-Process PowerShell -ArgumentList "npm appium"
 
       - name: Run tests
+        working-directory: ${{ env.TEST_EXAMPLE_DIR }}
         run: |
-          cd Example
-          yarn test:windows
+          npm run test:windows
